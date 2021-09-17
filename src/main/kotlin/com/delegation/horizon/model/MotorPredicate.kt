@@ -13,4 +13,5 @@ class MotorPredicate {
     var vehicleModel = ""
     var kmsDriven = ""
 
+
 }
