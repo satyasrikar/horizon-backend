@@ -1,5 +1,5 @@
 package com.delegation.horizon.controller
-
+//Partner Controller 
 import com.delegation.horizon.model.Partner
 import com.delegation.horizon.repository.PartnerRepository
 import org.springframework.web.bind.annotation.*
