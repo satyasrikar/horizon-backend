@@ -68,6 +68,8 @@ class InsureeController(
             insureeRepository.save(insuree)
             motorInsuranceRequest.insureeId = insureeAutoGenId
             motorInsuranceService.generateMotorPredicatePolicy(motorInsuranceRequest)
+
+
             return motorInsuranceRequest
         } else
             motorInsuranceRequest.name = "NULL"

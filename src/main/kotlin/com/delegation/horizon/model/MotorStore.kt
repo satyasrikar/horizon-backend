@@ -16,5 +16,6 @@ class MotorStore {
 
     var motorMake = ""
     var motorModel = ""
+    var motorCategory = ""
 
 }

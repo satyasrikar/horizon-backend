@@ -50,7 +50,7 @@ class PartnerController(val partnerRepository: PartnerRepository) {
     }
 
     @DeleteMapping("/partners/{partnerId}")
-    fun deleteMotorFromStore(@PathVariable partnerId: String) : String {
+    fun deletePartnerFromStore(@PathVariable partnerId: String) : String {
         partnerRepository.deleteByPartnerId(partnerId)
         return "Deleted"
     }

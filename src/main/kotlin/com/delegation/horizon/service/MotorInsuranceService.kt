@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 class MotorInsuranceService {
 
     fun generateMotorPredicatePolicy(motorInsuranceDTO: MotorInsuranceDTO): MotorInsuranceDTO{
-        println(motorInsuranceDTO.address)
+
 
         return motorInsuranceDTO
 
