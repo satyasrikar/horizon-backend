@@ -13,9 +13,11 @@ class MotorStore {
 
     @Id
     var motorStoreId = ""
+    var motorCompany = ""  //TATA
+    var motorModel = "" //NANO
+    var exShowroomPrice = "" // 500000
+    var engineCc = "" // 2300
 
-    var motorMake = ""
-    var motorModel = ""
-    var motorCategory = ""
+
 
 }

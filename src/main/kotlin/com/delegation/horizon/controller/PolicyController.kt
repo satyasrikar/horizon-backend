@@ -2,13 +2,15 @@ package com.delegation.horizon.controller
 
 import com.delegation.horizon.model.Policy
 import com.delegation.horizon.repository.PolicyRepository
+import com.delegation.horizon.request.MotorInsuranceDTO
+import com.delegation.horizon.service.MotorInsuranceService
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
 @RestController
 @RequestMapping("/v1")
 @CrossOrigin(origins = ["*"], maxAge = 3600)
-class PolicyController(val policyRepository: PolicyRepository) {
+class PolicyController(val policyRepository: PolicyRepository, val motorInsuranceService: MotorInsuranceService) {
 
     @GetMapping("/policies")
     fun viewAllPolicies(): List<Policy>{
@@ -45,6 +47,8 @@ class PolicyController(val policyRepository: PolicyRepository) {
         return policyRepository.save(policyRequest)
     }
 
+
+
     @PutMapping("/policies")
     fun updatePolicy(@RequestBody policyRequest: Policy): Policy {
         return policyRepository.save(policyRequest)
@@ -54,6 +58,11 @@ class PolicyController(val policyRepository: PolicyRepository) {
     fun deletePolicyFromStore(@PathVariable policyId: String) : String {
         policyRepository.deleteByPolicyId(policyId)
         return "Deleted"
+    }
+
+    @PostMapping("/users")
+    fun addNewMotorInsurance(@RequestBody motorInsuranceRequest: MotorInsuranceDTO): MotorInsuranceDTO {
+        return motorInsuranceService.generateMotorPolicy(motorInsuranceRequest)
     }
 
 }

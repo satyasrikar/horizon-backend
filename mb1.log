@@ -1,0 +1,7 @@
+{"message":"[mb:2525] Running with --allowInjection set. See http://localhost:2525/docs/security for security info","level":"warn","timestamp":"2021-09-17T19:09:38.145Z"}
+{"message":"[mb:2525] mountebank v2.5.0 now taking orders - point your browser to http://localhost:2525/ for help","level":"info","timestamp":"2021-09-17T19:09:38.154Z"}
+{"message":"[mb:2525] GET /images/book.jpg","level":"info","timestamp":"2021-09-17T19:09:43.739Z"}
+{"message":"[mb:2525] GET /images/book.jpg","level":"info","timestamp":"2021-09-17T19:09:48.676Z"}
+{"message":"[mb:2525] OPTIONS /imposters","level":"info","timestamp":"2021-09-17T19:14:10.002Z"}
+{"message":"[mb:2525] OPTIONS /imposters","level":"info","timestamp":"2021-09-17T19:14:32.073Z"}
+{"message":"[mb:2525] Adios - see you soon?","level":"info","timestamp":"2021-09-17T19:14:54.400Z"}

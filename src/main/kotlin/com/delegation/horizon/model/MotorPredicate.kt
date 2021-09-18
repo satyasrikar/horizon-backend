@@ -12,6 +12,7 @@ class MotorPredicate {
     var vehicleMake = ""
     var vehicleModel = ""
     var kmsDriven = ""
+    var onRoadAge = ""
 
 
 

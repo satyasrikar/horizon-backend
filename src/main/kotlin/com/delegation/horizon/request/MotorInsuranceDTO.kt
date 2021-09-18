@@ -2,7 +2,7 @@ package com.delegation.horizon.request
 //DTO to contain details of motor insurance request
 
 class MotorInsuranceDTO {
-    var insureeId = ""
+    var userId = ""
     var name = ""
     var address = ""
     var email = ""

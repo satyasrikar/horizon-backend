@@ -12,15 +12,16 @@ import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 
 @Document
-class Insuree {
+class User {
 
     @Id
-    var insureeId = ""
+    var userId = ""
     var name = ""
     var address = ""
     var email = ""
     var phone = ""
     var insuranceType = ""
+
 
 
 }

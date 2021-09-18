@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/v1/store")
 @CrossOrigin(origins = ["*"], maxAge = 3600)
-class MotorStoreController(val motorStoreRepository: MotorStoreRepository) {
+class StoreController(val motorStoreRepository: MotorStoreRepository) {
 
     @GetMapping("/motors")
     fun viewAllMotorsInStore(): List<MotorStore> {

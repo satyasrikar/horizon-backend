@@ -11,7 +11,7 @@ class Policy {
 
     var policyAmount = "" //25000
 
-    var policyTier = "" //A or B or C
+    var policyTier = "" //Gold, Silver, Bronze
 
     var policyDescription = "" //Lorem ipsum
 }
