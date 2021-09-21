@@ -3,12 +3,20 @@ package com.delegation.horizon.controller
 import com.delegation.horizon.model.MotorStore
 import com.delegation.horizon.repository.MotorStoreRepository
 import org.springframework.web.bind.annotation.*
+import java.util.*
 
 @RestController
 @RequestMapping("/v1/store")
 @CrossOrigin(origins = ["*"], maxAge = 3600)
 class StoreController(val motorStoreRepository: MotorStoreRepository) {
 
+
+    @GetMapping("/test")
+    fun testYear() {
+        var d = Date()
+        var r = d.year
+        println(r)
+    }
     @GetMapping("/motors")
     fun viewAllMotorsInStore(): List<MotorStore> {
         return motorStoreRepository.findAll()

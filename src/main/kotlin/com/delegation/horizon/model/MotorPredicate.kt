@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 class MotorPredicate {
     @Id
     var regNumber = ""
-    var regYear = ""
+    var regYear = 0
     var vehicleMake = ""
     var vehicleModel = ""
     var kmsDriven = ""

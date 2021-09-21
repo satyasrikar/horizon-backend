@@ -25,7 +25,7 @@ class PolicyController(val policyRepository: PolicyRepository, val motorInsuranc
 
 
 
-    @PostMapping("/policies")
+    @PostMapping("/testpolicies")
     fun addPolicy(@RequestBody policyRequest: Policy): Policy {
         val leftLimit = 97 // letter 'a'
         val rightLimit = 122 // letter 'z'
@@ -60,9 +60,9 @@ class PolicyController(val policyRepository: PolicyRepository, val motorInsuranc
         return "Deleted"
     }
 
-    @PostMapping("/users")
-    fun addNewMotorInsurance(@RequestBody motorInsuranceRequest: MotorInsuranceDTO): MotorInsuranceDTO {
-        return motorInsuranceService.generateMotorPolicy(motorInsuranceRequest)
+    @PostMapping("/policies")
+    fun addNewMotorInsurance(@RequestBody motorInsuranceRequest: MotorInsuranceDTO): Policy {
+        return motorInsuranceService.generatePolicy(motorInsuranceRequest)
     }
 
 }

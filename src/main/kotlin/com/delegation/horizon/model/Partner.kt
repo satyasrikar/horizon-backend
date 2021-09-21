@@ -8,12 +8,14 @@ class Partner {
 
     @Id
     var partnerId = ""
-
     var partnerName = ""
-
     var partnerImageUrl = ""
-
     var partnerDescription = ""
+    var partnerDiscount = 0
+    var partnerPremium = 0
+    var partnerLicense = 0
+
+
 
 
 

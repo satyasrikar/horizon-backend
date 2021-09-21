@@ -1,7 +1,6 @@
-{"message":"[mb:2525] Running with --allowInjection set. See http://localhost:2525/docs/security for security info","level":"warn","timestamp":"2021-09-17T19:15:11.837Z"}
-{"message":"[mb:2525] mountebank v2.5.0 now taking orders - point your browser to http://localhost:2525/ for help","level":"info","timestamp":"2021-09-17T19:15:11.846Z"}
-{"message":"[mb:2525] OPTIONS /imposters","level":"info","timestamp":"2021-09-17T19:15:17.475Z"}
-{"message":"[mb:2525] OPTIONS /imposters/9999","level":"info","timestamp":"2021-09-17T19:15:19.594Z"}
-{"message":"[mb:2525] OPTIONS /imposters/9999","level":"info","timestamp":"2021-09-17T19:15:19.811Z"}
-{"message":"[mb:2525] OPTIONS /imposters","level":"info","timestamp":"2021-09-17T19:15:21.133Z"}
-{"message":"[mb:2525] Adios - see you soon?","level":"info","timestamp":"2021-09-18T15:45:41.797Z"}
+{"message":"[mb:2525] Running with --allowInjection set. See http://localhost:2525/docs/security for security info","level":"warn","timestamp":"2021-09-20T14:27:10.569Z"}
+{"message":"[mb:2525] mountebank v2.5.0 now taking orders - point your browser to http://localhost:2525/ for help","level":"info","timestamp":"2021-09-20T14:27:10.596Z"}
+{"message":"[mb:2525] POST /imposters","level":"info","timestamp":"2021-09-20T14:27:17.247Z"}
+{"message":"[http:5555] Open for business...","level":"info","timestamp":"2021-09-20T14:27:17.405Z"}
+{"message":"[http:5555] ::1:49363 => POST /paramsTest?kms=100","level":"info","timestamp":"2021-09-20T14:28:15.685Z"}
+{"message":"[http:5555] no predicate match, using default response","level":"info","timestamp":"2021-09-20T14:28:15.726Z"}

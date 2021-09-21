@@ -1,7 +1,41 @@
-{"message":"[mb:2525] Running with --allowInjection set. See http://localhost:2525/docs/security for security info","level":"warn","timestamp":"2021-09-17T19:09:38.145Z"}
-{"message":"[mb:2525] mountebank v2.5.0 now taking orders - point your browser to http://localhost:2525/ for help","level":"info","timestamp":"2021-09-17T19:09:38.154Z"}
-{"message":"[mb:2525] GET /images/book.jpg","level":"info","timestamp":"2021-09-17T19:09:43.739Z"}
-{"message":"[mb:2525] GET /images/book.jpg","level":"info","timestamp":"2021-09-17T19:09:48.676Z"}
-{"message":"[mb:2525] OPTIONS /imposters","level":"info","timestamp":"2021-09-17T19:14:10.002Z"}
-{"message":"[mb:2525] OPTIONS /imposters","level":"info","timestamp":"2021-09-17T19:14:32.073Z"}
-{"message":"[mb:2525] Adios - see you soon?","level":"info","timestamp":"2021-09-17T19:14:54.400Z"}
+{"message":"[mb:2525] Running with --allowInjection set. See http://localhost:2525/docs/security for security info","level":"warn","timestamp":"2021-09-20T12:23:57.464Z"}
+{"message":"[mb:2525] mountebank v2.5.0 now taking orders - point your browser to http://localhost:2525/ for help","level":"info","timestamp":"2021-09-20T12:23:57.473Z"}
+{"message":"[mb:2525] POST /imposters","level":"info","timestamp":"2021-09-20T12:24:02.627Z"}
+{"message":"[http:8787] Open for business...","level":"info","timestamp":"2021-09-20T12:24:02.925Z"}
+{"message":"[http:8787] ::1:61106 => POST /generatePolicy?kms=5000","level":"info","timestamp":"2021-09-20T12:24:10.119Z"}
+{"message":"[http:8787] no predicate match, using default response","level":"info","timestamp":"2021-09-20T12:24:10.130Z"}
+{"message":"[http:8787] ::1:50411 => POST /generatePolicy?kms=5000","level":"info","timestamp":"2021-09-20T12:24:25.657Z"}
+{"message":"[http:8787] no predicate match, using default response","level":"info","timestamp":"2021-09-20T12:24:25.660Z"}
+{"message":"[http:8787] ::1:62735 => POST /generatePolicy","level":"info","timestamp":"2021-09-20T12:24:42.689Z"}
+{"message":"[http:8787] no predicate match, using default response","level":"info","timestamp":"2021-09-20T12:24:42.692Z"}
+{"message":"[mb:2525] POST /imposters","level":"info","timestamp":"2021-09-20T12:54:41.072Z"}
+{"message":"[http:8878] Open for business...","level":"info","timestamp":"2021-09-20T12:54:41.097Z"}
+{"message":"[http:8878] ::1:65101 => POST /generatePolicy","level":"info","timestamp":"2021-09-20T12:55:30.774Z"}
+{"message":"[http:8878] no predicate match, using default response","level":"info","timestamp":"2021-09-20T12:55:30.777Z"}
+{"message":"[mb:2525] POST /imposters","level":"info","timestamp":"2021-09-20T12:58:30.556Z"}
+{"message":"[http:1234] Open for business...","level":"info","timestamp":"2021-09-20T12:58:30.566Z"}
+{"message":"[http:1234] ::1:61649 => POST /generatePolicy","level":"info","timestamp":"2021-09-20T12:58:37.308Z"}
+{"message":"[http:1234] no predicate match, using default response","level":"info","timestamp":"2021-09-20T12:58:37.311Z"}
+{"message":"[http:1234] ::1:59266 => POST /paramsTest","level":"info","timestamp":"2021-09-20T12:59:11.962Z"}
+{"message":"[http:1234] no predicate match, using default response","level":"info","timestamp":"2021-09-20T12:59:11.963Z"}
+{"message":"[mb:2525] POST /imposters","level":"info","timestamp":"2021-09-20T13:00:18.045Z"}
+{"message":"[http:5487] Open for business...","level":"info","timestamp":"2021-09-20T13:00:18.069Z"}
+{"message":"[http:5487] ::1:54203 => POST /paramsTest","level":"info","timestamp":"2021-09-20T13:00:26.579Z"}
+{"message":"[http:5487] no predicate match, using default response","level":"info","timestamp":"2021-09-20T13:00:26.582Z"}
+{"message":"[mb:2525] POST /imposters","level":"info","timestamp":"2021-09-20T13:01:06.501Z"}
+{"message":"[http:6666] Open for business...","level":"info","timestamp":"2021-09-20T13:01:06.503Z"}
+{"message":"[http:6666] ::1:55732 => POST /paramsTest","level":"info","timestamp":"2021-09-20T13:01:13.178Z"}
+{"message":"[http:6666] no predicate match, using default response","level":"info","timestamp":"2021-09-20T13:01:13.192Z"}
+{"message":"[mb:2525] POST /imposters","level":"info","timestamp":"2021-09-20T13:01:58.156Z"}
+{"message":"[http:9997] Open for business...","level":"info","timestamp":"2021-09-20T13:01:58.160Z"}
+{"message":"[http:9997] ::1:51342 => POST /paramsTest","level":"info","timestamp":"2021-09-20T13:02:05.863Z"}
+{"message":"[http:9997] no predicate match, using default response","level":"info","timestamp":"2021-09-20T13:02:05.864Z"}
+{"message":"[http:9997] ::1:50939 => POST /paramsTest","level":"info","timestamp":"2021-09-20T13:02:10.139Z"}
+{"message":"[http:9997] no predicate match, using default response","level":"info","timestamp":"2021-09-20T13:02:10.140Z"}
+{"message":"[mb:2525] POST /imposters","level":"info","timestamp":"2021-09-20T13:03:42.471Z"}
+{"message":"[http:2222] Open for business...","level":"info","timestamp":"2021-09-20T13:03:42.504Z"}
+{"message":"[http:2222] ::1:62381 => POST /paramsTest","level":"info","timestamp":"2021-09-20T13:04:04.292Z"}
+{"message":"[http:2222] no predicate match, using default response","level":"info","timestamp":"2021-09-20T13:04:04.294Z"}
+{"message":"[http:2222] ::1:60822 => POST /paramsTest","level":"info","timestamp":"2021-09-20T13:04:24.973Z"}
+{"message":"[http:2222] no predicate match, using default response","level":"info","timestamp":"2021-09-20T13:04:24.992Z"}
+{"message":"[mb:2525] Adios - see you soon?","level":"info","timestamp":"2021-09-20T13:15:06.180Z"}

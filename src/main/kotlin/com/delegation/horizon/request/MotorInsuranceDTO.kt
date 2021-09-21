@@ -9,8 +9,10 @@ class MotorInsuranceDTO {
     var phone = ""
     var insuranceType = ""
     var regNumber = ""
-    var regYear = ""
+    var regYear = 0
     var vehicleMake = ""
     var vehicleModel = ""
     var kmsDriven = ""
+    var engineCc = 0;
+    var vehiclePrice = 0.0;
 }
