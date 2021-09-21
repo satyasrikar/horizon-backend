@@ -1,14 +1,17 @@
 package com.delegation.horizon.controller
 //Partner Controller 
 import com.delegation.horizon.model.Partner
+import com.delegation.horizon.model.Policy
 import com.delegation.horizon.repository.PartnerRepository
+import com.delegation.horizon.request.MotorInsuranceDTO
+import com.delegation.horizon.service.MotorInsuranceService
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
 @RestController
 @RequestMapping("/v1/store")
 @CrossOrigin(origins = ["*"], maxAge = 3600)
-class PartnerController(val partnerRepository: PartnerRepository) {
+class PartnerController(val partnerRepository: PartnerRepository, val motorInsuranceService: MotorInsuranceService) {
 
     @GetMapping("/partners")
     fun viewAllPartners(): List<Partner> {
@@ -16,10 +19,9 @@ class PartnerController(val partnerRepository: PartnerRepository) {
     }
 
     @GetMapping("/partners/{partnerId}")
-    fun viewPartnerById(@PathVariable partnerId: String):Partner {
+    fun viewPartnerById(@PathVariable partnerId: String): Partner {
         return partnerRepository.findByPartnerId(partnerId)
     }
-
 
 
     @PostMapping("/partners")
@@ -50,10 +52,45 @@ class PartnerController(val partnerRepository: PartnerRepository) {
     }
 
     @DeleteMapping("/partners/{partnerId}")
-    fun deletePartnerFromStore(@PathVariable partnerId: String) : String {
+    fun deletePartnerFromStore(@PathVariable partnerId: String): String {
         partnerRepository.deleteByPartnerId(partnerId)
         return "Deleted"
     }
 
+    @PostMapping("/partners/verifyContract")
+    fun verifyContract( @RequestBody motorInsuranceDTO: MotorInsuranceDTO): String? {
+        // generatePolicy
+        // Check if mandatory fields are there
 
+        var isContractVerified = false;
+
+//        println(motorInsuranceDTO.partnerDiscount);
+//        println(motorInsuranceDTO.vehiclePrice);
+
+        println(motorInsuranceDTO);
+
+
+
+        return if(motorInsuranceDTO.partnerDiscount === 0.0 || motorInsuranceDTO.partnerPremium === 0.0 || motorInsuranceDTO.insuranceType === "" || motorInsuranceDTO.regYear === 0 || motorInsuranceDTO.regNumber === "" || motorInsuranceDTO.engineCc === 0 || motorInsuranceDTO.vehiclePrice === 0.0
+        ) {
+            println(motorInsuranceDTO.partnerDiscount);
+            "Not Verified";
+        } else {
+            var policy = Policy()
+
+            policy = motorInsuranceService.generatePolicy(motorInsuranceDTO);
+            println(policy.policyAmount);
+            return if(policy.policyAmount===0) {
+                "Not Verified"
+            } else {
+                "Verified"
+            }
+
+
+            "Verified";
+
+        }
+
+
+    }
 }
