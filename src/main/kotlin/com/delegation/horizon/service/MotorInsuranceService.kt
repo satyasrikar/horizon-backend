@@ -100,133 +100,100 @@ class MotorInsuranceService(
 
         if (age <= 1) {
             depreciation = 0.15;
-            depreciatedValue = currentPrice - (depreciation * currentPrice)
-            println(depreciatedValue)
 
         } else if (age > 1 && age <= 2) {
             depreciation = 0.20;
-            depreciatedValue = currentPrice - (depreciation * currentPrice)
-            println(depreciatedValue)
 
         } else if (age > 2 && age <= 3) {
             depreciation = 0.30;
-            depreciatedValue = currentPrice - (depreciation * currentPrice)
-            println(depreciatedValue)
 
         } else if (age > 3 && age <= 4) {
             var depreciation = 0.40;
-            depreciatedValue = currentPrice - (depreciation * currentPrice)
-            println(depreciatedValue)
 
         } else if (age > 4 && age <= 5) {
             depreciation = 0.50;
-            depreciatedValue = currentPrice - (depreciation * currentPrice)
-            println(depreciatedValue)
 
         } else {
             depreciation = 0.55;
-            depreciatedValue = currentPrice - (depreciation * currentPrice)
-            println(depreciatedValue)
 
         }
 
-        println("depreciatedValue = " + depreciatedValue)
+        depreciatedValue = currentPrice - (depreciation * currentPrice)
+
+
 
         if (age <= 5) {
             if (enginePower >= 1000 && enginePower < 2500) {
                 damagePremium = 0.0328;
-                currentPrice = (damagePremium* depreciatedValue);
-
             } else if (enginePower >= 2500 && enginePower < 10000) {
                 damagePremium = 0.0344;
-                currentPrice = (damagePremium* depreciatedValue);
 
             } else if (enginePower >= 10000) {
                 damagePremium = 0.0312;
-                currentPrice = (damagePremium* depreciatedValue);
 
             }
         } else if (age > 5) {
             if (enginePower >= 1000 && enginePower < 2500) {
                 damagePremium = 0.0328;
-                currentPrice = (damagePremium* depreciatedValue);
 
             } else if (enginePower >= 2500 && enginePower < 10000) {
                 damagePremium = 0.0344;
-                currentPrice = (damagePremium* depreciatedValue);
 
             } else if (enginePower >= 10000) {
                 damagePremium = 0.0312;
-                currentPrice = (damagePremium* depreciatedValue);
 
             }
         }
+        currentPrice = (damagePremium* depreciatedValue);
 
-        println("after Damage Premium = " + currentPrice)
+
 
 
         currentPrice = currentPrice - (partnerDiscount * currentPrice);
 
-        println("after partner discount = " + currentPrice)
 
         if (age <= 1) {
             ncbDiscount = 0.20;
-            currentPrice = currentPrice - (currentPrice * ncbDiscount)
-
         } else if (age <= 2) {
             ncbDiscount = 0.25;
-            currentPrice = currentPrice - (currentPrice * ncbDiscount)
 
         } else if (age <= 3) {
             ncbDiscount = 0.30;
-            currentPrice = currentPrice - (currentPrice * ncbDiscount)
 
         } else if (age <= 4) {
             ncbDiscount = 0.40;
-            currentPrice = currentPrice - (currentPrice * ncbDiscount)
 
         } else if (age <= 5) {
             ncbDiscount = 0.50;
-            currentPrice = currentPrice - (currentPrice * ncbDiscount)
 
         } else if (age > 5) {
             ncbDiscount = 0.55;
-            currentPrice = currentPrice - (currentPrice * ncbDiscount)
-
         }
 
-        println("after ncbDiscount = " + currentPrice)
+        currentPrice = currentPrice - (currentPrice * ncbDiscount)
 
 
         if (enginePower >= 1000 && enginePower < 2500) {
             thirdPartyPremium = 2072;
-            currentPrice = currentPrice + thirdPartyPremium;
-
-
         } else if (enginePower >= 2500 && enginePower < 10000) {
             thirdPartyPremium = 3221;
-            currentPrice = currentPrice + thirdPartyPremium;
-
-
         } else if (enginePower >= 10000) {
             thirdPartyPremium = 7890;
-            currentPrice = currentPrice + thirdPartyPremium;
-
         }
 
-        println("after third party Premium = " + currentPrice)
+        currentPrice = currentPrice + thirdPartyPremium;
 
 
         currentPrice = currentPrice + 400;
 
 
         var policyAmount = currentPrice + (currentPrice * gstRate)
-        println("final policy = " + policyAmount)
 
         var policy = Policy()
-        policy.policyId = "POLC986439854"
+        policy.policyId = generateId()
         policy.policyAmount = policyAmount.toInt()
         policy.policyDescription = "motor"
+        policyRepository.save(policy)
         return policy
 
 
