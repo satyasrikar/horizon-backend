@@ -2,17 +2,13 @@ package com.delegation.horizon.controller
 //Partner Controller 
 import com.delegation.horizon.model.Partner
 import com.delegation.horizon.repository.PartnerRepository
-import com.delegation.horizon.request.MotorInsuranceDTO
-import com.delegation.horizon.service.UtilityService
-import org.json.simple.JSONObject
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
 @RestController
 @RequestMapping("/v1/store")
 @CrossOrigin(origins = ["*"], maxAge = 3600)
-class PartnerController(val partnerRepository: PartnerRepository,
-                        val utilityService: UtilityService) {
+class PartnerController(val partnerRepository: PartnerRepository) {
 
     @GetMapping("/partners")
     fun viewAllPartners(): List<Partner> {
@@ -59,28 +55,5 @@ class PartnerController(val partnerRepository: PartnerRepository,
         return "Deleted"
     }
 
-
-    @PostMapping("/partners/verifyContract")
-    fun verifyContract(motorInsuranceDTO: MotorInsuranceDTO): String? {
-        // generatePolicy
-        // Check if mandatory fields are there
-
-        println(motorInsuranceDTO.insuranceType)
-
-        var isContractVerified = false;
-        if(motorInsuranceDTO.partnerDiscount===0.00){
-            isContractVerified = false;
-            println("Partner Verification Failed")
-            return "Not Verified"
-        }
-        else {
-            return "Verified"
-        }
-    }
-
-    @PostMapping("/partners/templates")
-    fun generateTemplate(@RequestBody templateName: String): JSONObject {
-        return utilityService.generateJSONFile(templateName);
-    }
 
 }
