@@ -10,19 +10,19 @@ import java.io.IOException
 class UtilityService {
 
     fun generateJSONFile(templateName: String) : JSONObject{
-        var jsonObject: JSONObject = JSONObject()
+        val jsonObject = JSONObject()
 
-        jsonObject.put("Name","Horizon")
-        jsonObject.put("API","www.horizonIndia.com")
+        jsonObject["Name"] = "Horizon"
+        jsonObject["API"] = "www.horizonIndia.com"
 
-        var list: JSONArray = JSONArray()
+        val list = JSONArray()
         list.add("Shiv")
         list.add("Satya")
 
-        jsonObject.put("Devs", list)
+        jsonObject["Devs"] = list
 
         try{
-            var fileWriter: FileWriter =  FileWriter(templateName+".json")
+            val fileWriter =  FileWriter("$templateName.json")
             println("Writing to file")
             fileWriter.write(jsonObject.toJSONString())
             fileWriter.flush()
