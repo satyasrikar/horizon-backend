@@ -8,6 +8,7 @@ class PartnerMapping {
     @Id
     var mappingId = ""
 
+
     var mappingContent = ""
 
 }
