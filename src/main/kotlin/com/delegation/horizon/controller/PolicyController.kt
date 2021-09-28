@@ -4,13 +4,14 @@ import com.delegation.horizon.model.Policy
 import com.delegation.horizon.repository.PolicyRepository
 import com.delegation.horizon.request.MotorInsuranceDTO
 import com.delegation.horizon.service.MotorInsuranceService
+import com.delegation.horizon.service.UtilityService
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
 @RestController
 @RequestMapping("/v1")
 @CrossOrigin(origins = ["*"], maxAge = 3600)
-class PolicyController(val policyRepository: PolicyRepository, val motorInsuranceService: MotorInsuranceService) {
+class PolicyController(val policyRepository: PolicyRepository, val motorInsuranceService: MotorInsuranceService, val utilityService: UtilityService) {
 
     @GetMapping("/policies")
     fun viewAllPolicies(): List<Policy>{
@@ -45,6 +46,11 @@ class PolicyController(val policyRepository: PolicyRepository, val motorInsuranc
                 .toUpperCase()
         policyRequest.policyId = policyAutoGenId
         return policyRepository.save(policyRequest)
+    }
+
+    @PostMapping("/testTemplate")
+    fun testTemplate(): String {
+        return utilityService.generatePropertiesFile()
     }
 
 
