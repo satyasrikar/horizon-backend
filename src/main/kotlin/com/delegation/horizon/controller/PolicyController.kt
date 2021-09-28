@@ -2,6 +2,7 @@ package com.delegation.horizon.controller
 
 import com.delegation.horizon.model.Policy
 import com.delegation.horizon.repository.PolicyRepository
+import com.delegation.horizon.request.MappingRequestDTO
 import com.delegation.horizon.request.MotorInsuranceDTO
 import com.delegation.horizon.service.MotorInsuranceService
 import com.delegation.horizon.service.UtilityService
@@ -49,8 +50,9 @@ class PolicyController(val policyRepository: PolicyRepository, val motorInsuranc
     }
 
     @PostMapping("/testTemplate")
-    fun testTemplate(): String {
-        return utilityService.generatePropertiesFile()
+    fun testTemplate(@RequestBody mappingRequest: MappingRequestDTO): String {
+
+        return utilityService.generatePropertiesFile(mappingRequest)
     }
 
 
