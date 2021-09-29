@@ -2,13 +2,15 @@ package com.delegation.horizon.controller
 //Partner Controller 
 import com.delegation.horizon.model.Partner
 import com.delegation.horizon.repository.PartnerRepository
+import com.delegation.horizon.service.UtilityService
+import org.json.simple.JSONObject
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
 @RestController
 @RequestMapping("/v1/store")
 @CrossOrigin(origins = ["*"], maxAge = 3600)
-class PartnerController(val partnerRepository: PartnerRepository) {
+class PartnerController(val partnerRepository: PartnerRepository, val utilityService: UtilityService) {
 
     @GetMapping("/partners")
     fun viewAllPartners(): List<Partner> {
@@ -53,6 +55,12 @@ class PartnerController(val partnerRepository: PartnerRepository) {
     fun deletePartnerFromStore(@PathVariable partnerId: String) : String {
         partnerRepository.deleteByPartnerId(partnerId)
         return "Deleted"
+    }
+
+
+    @PostMapping("/generate")
+    fun generateJSONTemplate(@RequestBody jsonRequest: JSONObject): JSONObject {
+       return utilityService.generateJSONFile(jsonRequest)
     }
 
 

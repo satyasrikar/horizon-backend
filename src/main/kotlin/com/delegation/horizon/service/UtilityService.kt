@@ -18,31 +18,24 @@ import java.util.*
 class UtilityService(val partnerMappingRepository: PartnerMappingRepository, val motorInsuranceService: MotorInsuranceService) {
 
 
-    fun generateJSONFile(templateName: String) : JSONObject{
-        val jsonObject = JSONObject()
+    fun generateJSONFile(jsonRequest: JSONObject) : JSONObject{
 
-        jsonObject["Name"] = "Horizon"
-        jsonObject["API"] = "www.horizonIndia.com"
 
-        val list = JSONArray()
-        list.add("Shiv")
-        list.add("Satya")
 
-        jsonObject["Devs"] = list
 
         try{
-            val fileWriter =  FileWriter("$templateName.json")
+            val fileWriter =  FileWriter("partnerMapping.json")
             println("Writing to file")
-            fileWriter.write(jsonObject.toJSONString())
+            fileWriter.write(jsonRequest.toJSONString())
             fileWriter.flush()
         }
         catch (e:IOException) {
             e.printStackTrace()
         }
         println("JSON Object=")
-        println(jsonObject)
+        println(jsonRequest)
 
-        return jsonObject
+        return jsonRequest
     }
     fun generatePropertiesFile(templateData: MappingRequestDTO): String {
         val props = Properties()
