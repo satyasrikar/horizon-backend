@@ -28,6 +28,10 @@ class UtilityService(val partnerMappingRepository: PartnerMappingRepository, val
             println("Writing to file")
             fileWriter.write(jsonRequest.toJSONString())
             fileWriter.flush()
+            val partnerMapping = PartnerMapping()
+            partnerMapping.mappingId = motorInsuranceService.generateId()
+            partnerMapping.mappingContent = jsonRequest.toJSONString()
+            partnerMappingRepository.save(partnerMapping)
         }
         catch (e:IOException) {
             e.printStackTrace()
