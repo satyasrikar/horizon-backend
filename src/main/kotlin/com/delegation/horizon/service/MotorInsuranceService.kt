@@ -1,8 +1,6 @@
 package com.delegation.horizon.service
 
-import com.delegation.horizon.model.MotorPredicate
 import com.delegation.horizon.model.Policy
-import com.delegation.horizon.model.User
 import com.delegation.horizon.repository.*
 import com.delegation.horizon.request.MotorInsuranceDTO
 import org.springframework.stereotype.Service
