@@ -16,4 +16,8 @@ phases:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - docker push 681883126489.dkr.ecr.ap-south-1.amazonaws.com/horizon-app:latest
+      - printf '[{"name":"springapp","imageUri":"%s"}]' 681883126489.dkr.ecr.ap-south-1.amazonaws.com/horizon-app:latest:spring-boot-docker.jar > imagedefinitions.json
+      - cat imagedefinitions.json
+  artifacts:
+    files: imagedefinitions.json
 
