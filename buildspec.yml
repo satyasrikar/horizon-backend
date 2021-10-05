@@ -23,7 +23,8 @@ phases:
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
 
-  artifacts:
-    files:
-      - target/spring-boot-docker.jar
-    discard-paths: yes
+artifacts:
+  files:
+    - target/spring-boot-docker.jar
+
+  discard-paths: yes
