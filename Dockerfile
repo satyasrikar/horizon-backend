@@ -1,4 +1,4 @@
 FROM openjdk:16
 EXPOSE 8080
-COPY  spring-boot-docker.jar spring-boot-docker.jar
+ADD  resources/spring-boot-docker.jar spring-boot-docker.jar
 ENTRYPOINT ["java","-jar","/spring-boot-docker.jar"]
