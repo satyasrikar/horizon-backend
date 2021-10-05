@@ -2,6 +2,8 @@ package com.delegation.horizon.controller
 //Partner Controller
 
 import com.delegation.horizon.model.Partner
+import com.delegation.horizon.model.PartnerMapping
+import com.delegation.horizon.repository.PartnerMappingRepository
 import com.delegation.horizon.repository.PartnerRepository
 import com.delegation.horizon.service.UtilityService
 import org.json.simple.JSONObject
@@ -17,7 +19,7 @@ import java.util.*
 @RestController
 @RequestMapping("/v1/store")
 @CrossOrigin(origins = ["*"], maxAge = 3600)
-class PartnerController(val partnerRepository: PartnerRepository, val utilityService: UtilityService) {
+class PartnerController(val partnerRepository: PartnerRepository, val utilityService: UtilityService, val partnerMappingRepository: PartnerMappingRepository) {
 
 
 
@@ -38,8 +40,14 @@ class PartnerController(val partnerRepository: PartnerRepository, val utilitySer
 
 
     @PostMapping("/generate")
-    fun generateJSONTemplate(@RequestBody jsonRequest: JSONObject): JSONObject {
+    fun generateJSONTemplate(@RequestBody jsonRequest: JSONObject): PartnerMapping {
        return utilityService.generateJSONFile(jsonRequest)
+    }
+
+    @GetMapping("/mapping/{id}")
+    fun findMappingById(@PathVariable mappingId: String): Optional<PartnerMapping> {
+        return partnerMappingRepository.findById(mappingId)
+
     }
 
 

@@ -18,19 +18,20 @@ import java.util.*
 class UtilityService(val partnerMappingRepository: PartnerMappingRepository, val motorInsuranceService: MotorInsuranceService) {
 
 
-    fun generateJSONFile(jsonRequest: JSONObject) : JSONObject{
+    fun generateJSONFile(jsonRequest: JSONObject) : PartnerMapping{
 
 
 
-
+        val partnerMapping = PartnerMapping()
+        partnerMapping.mappingId = motorInsuranceService.generateId()
+        partnerMapping.mappingContent = jsonRequest.toJSONString()
         try{
             val fileWriter =  FileWriter("partnerMapping.json")
             println("Writing to file")
             fileWriter.write(jsonRequest.toJSONString())
             fileWriter.flush()
-            val partnerMapping = PartnerMapping()
-            partnerMapping.mappingId = motorInsuranceService.generateId()
-            partnerMapping.mappingContent = jsonRequest.toJSONString()
+
+
             partnerMappingRepository.save(partnerMapping)
         }
         catch (e:IOException) {
@@ -39,7 +40,7 @@ class UtilityService(val partnerMappingRepository: PartnerMappingRepository, val
         println("JSON Object=")
         println(jsonRequest)
 
-        return jsonRequest
+        return partnerMapping
     }
 
 
