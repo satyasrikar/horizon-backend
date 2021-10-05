@@ -1,32 +1,18 @@
 version: 0.2
 
-
 phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws --version
-      - aws ecr get-login --no-include-email --region ap-south-1
-      - REPOSITORY_URI=681883126489.dkr.ecr.ap-south-1.amazonaws.com/horizon-app
-      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
-
+      - $(aws ecr get-login --no-include-email --region ap-south-1)
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - mvn package
-      - docker build -t $REPOSITORY_URI:latest .
-      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+      - docker build -t horizon-app:latest .
+      - docker tag simpleapi:latest 681883126489.dkr.ecr.ap-south-1.amazonaws.com/horizon-app:latest
   post_build:
     commands:
       - echo Build completed on `date`
-      - echo Pushing the Docker images...
-      - docker push $REPOSITORY_URI:latest
-      - docker push $REPOSITORY_URI:$IMAGE_TAG
-      - echo Writing image definitions file...
-      - printf '[{"name":"nodeapp","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
-
-cache:
-  paths:
-    - '/root/.m2/**/*'
+      - echo Pushing the Docker image...
+      - docker push 681883126489.dkr.ecr.ap-south-1.amazonaws.com/horizon-app:latest
