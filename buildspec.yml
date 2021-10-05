@@ -17,9 +17,3 @@ phases:
       - echo Pushing the Docker image...
       - docker push 681883126489.dkr.ecr.ap-south-1.amazonaws.com/horizon-app:latest
 
-  artifacts:
-    files:
-      - '**/*'
-    base-directory: base_dir
-    name: build-artifact-name
-    discard-paths: no
