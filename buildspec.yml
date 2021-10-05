@@ -9,8 +9,8 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t horizon-app:latest .
-      - docker tag simpleapi:latest 681883126489.dkr.ecr.ap-south-1.amazonaws.com/horizon-app:latest
+      - docker build -t spring-boot-docker.jar .
+      - docker tag spring-boot-docker.jar 681883126489.dkr.ecr.ap-south-1.amazonaws.com/horizon-app:latest
   post_build:
     commands:
       - echo Build completed on `date`
