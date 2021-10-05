@@ -16,7 +16,10 @@ phases:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - docker push 681883126489.dkr.ecr.ap-south-1.amazonaws.com/horizon-app:latest
-      -  printf '[{"name":"nodeapp","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
-      - cat imagedefinitions.json
+
   artifacts:
-    files: imagedefinitions.json
+    files:
+      - '**/*'
+    base-directory: base_dir
+    name: build-artifact-name
+    discard-paths: no
