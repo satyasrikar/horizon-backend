@@ -2,49 +2,86 @@ package com.delegation.horizon.service
 
 import com.delegation.horizon.model.PartnerMapping
 import com.delegation.horizon.repository.PartnerMappingRepository
-import com.delegation.horizon.request.MappingRequestDTO
-import org.json.simple.JSONArray
+import org.jasypt.util.text.AES256TextEncryptor
 import org.json.simple.JSONObject
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpEntity
+import org.springframework.http.HttpHeaders
+import org.springframework.http.MediaType
 import org.springframework.stereotype.Service
-import java.io.FileOutputStream
-import java.io.FileWriter
+import org.springframework.web.client.RestTemplate
 import java.io.IOException
-import java.nio.file.Files
-import java.nio.file.Path
 import java.util.*
 
 
 @Service
-class UtilityService(val partnerMappingRepository: PartnerMappingRepository, val motorInsuranceService: MotorInsuranceService) {
+class UtilityService(
+    val partnerMappingRepository: PartnerMappingRepository
+) {
+    @Autowired
+    lateinit var restTemplate: RestTemplate
 
 
-    fun generateJSONFile(jsonRequest: JSONObject) : PartnerMapping{
+    var aesSecret: String = System.getenv("aes.passcode") ?: "horizonCore"
+    var mockServiceUrl: String = System.getenv("mountebank.url") ?: "http://localhost:9995/mapping/mock"
 
-
-
+    fun generateJSONFile(jsonRequest: JSONObject): PartnerMapping {
         val partnerMapping = PartnerMapping()
-        partnerMapping.mappingId = motorInsuranceService.generateId()
-        partnerMapping.mappingContent = jsonRequest.toJSONString()
-        try{
-            val fileWriter =  FileWriter("partnerMapping.json")
-            println("Writing to file")
-            fileWriter.write(jsonRequest.toJSONString())
-            fileWriter.flush()
-
-
+        partnerMapping.mappingId = generateId()
+        partnerMapping.mappingContent = encryptPayload(jsonRequest.toJSONString())
+        try {
             partnerMappingRepository.save(partnerMapping)
-        }
-        catch (e:IOException) {
+        } catch (e: IOException) {
             e.printStackTrace()
         }
-        println("JSON Object=")
-        println(jsonRequest)
-
         return partnerMapping
     }
 
+    fun mockMapping(): String? {
+        val headers = HttpHeaders()
+        headers.accept = Arrays.asList(MediaType.APPLICATION_JSON)
+        val entity: HttpEntity<String> = HttpEntity<String>(headers)
+        return restTemplate.postForObject(mockServiceUrl, entity, String().javaClass)
+    }
+
+    fun fetchMappingById(mappingId: String): String {
+        val fetchedMapping: PartnerMapping = partnerMappingRepository.findPartnerMappingByMappingId(mappingId)
+        return decryptPayload(fetchedMapping.mappingContent)
+    }
+
+    fun generateId(): String {
+        // AutoGenerate Unique Id
+        val leftLimit = 97 // letter 'a'
+        val rightLimit = 122 // letter 'z'
+        val targetStringLength = 10
+        val random = Random()
+        val generatedString = random.ints(leftLimit, rightLimit + 1)
+            .limit(targetStringLength.toLong())
+            .collect(
+                { StringBuilder() },
+                { obj: StringBuilder, codePoint: Int -> obj.appendCodePoint(codePoint) }
+            ) { obj: StringBuilder, s: StringBuilder? -> obj.append(s) }
+            .toString()
+        val randomIdGen = random.nextInt(1000)
+        return generatedString.substring(0, 3).uppercase(Locale.getDefault()) + randomIdGen + generatedString.substring(
+            5,
+            8
+        )
+            .uppercase(Locale.getDefault())
+    }
 
 
+    fun encryptPayload(payload: String?): String {
+        val aesEncryptor = AES256TextEncryptor()
+        aesEncryptor.setPassword(aesSecret)
+        return aesEncryptor.encrypt(payload)
+    }
+
+    fun decryptPayload(payload: String?): String {
+        val aesEncryptor = AES256TextEncryptor()
+        aesEncryptor.setPassword(aesSecret)
+        return aesEncryptor.decrypt(payload)
+    }
 
 
 }
