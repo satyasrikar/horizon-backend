@@ -23,5 +23,23 @@ class HorizonDelegationServerApplicationTests() {
         Assertions.assertEquals(9, utilityService!!.generateId().length)
     }
 
+    @Test
+    fun `Test AESEncryptor with request String`() {
+        val requestString = "horizon"
+        Assertions.assertEquals(64, utilityService!!.encryptPayload(requestString).length)
+        Assertions.assertEquals(
+            requestString.length,
+            utilityService!!.decryptPayload(utilityService!!.encryptPayload(requestString)).length
+        )
+    }
+
+    @Test
+    fun `Test AESEncryptor with empty request string`() {
+        val requestStringEmpty = ""
+        val response = "Empty Payload"
+        Assertions.assertEquals(response, utilityService!!.encryptPayload(requestStringEmpty))
+        Assertions.assertEquals(response, utilityService!!.decryptPayload(requestStringEmpty))
+    }
+
 
 }
