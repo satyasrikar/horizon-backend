@@ -2,19 +2,16 @@ package com.delegation.horizon.controller
 //Partner Controller
 
 import com.delegation.horizon.model.PartnerMapping
-import com.delegation.horizon.repository.PartnerMappingRepository
 import com.delegation.horizon.service.UtilityService
 import org.json.simple.JSONObject
 import org.springframework.web.bind.annotation.*
-import java.util.*
 
 
 @RestController
 @RequestMapping("/v1/store")
 @CrossOrigin(origins = ["*"], maxAge = 3600)
 class PartnerController(
-    val utilityService: UtilityService,
-    val partnerMappingRepository: PartnerMappingRepository
+    val utilityService: UtilityService
 ) {
 
     //Mocking Service / Mountebank
@@ -25,15 +22,10 @@ class PartnerController(
 
     //Generate JSON Template / Persist to Mongo
     @PostMapping("/generate")
-    fun generateJSONTemplate(@RequestBody jsonRequest: JSONObject): PartnerMapping {
-        return utilityService.generateJSONFile(jsonRequest)
+    fun generateMapping(@RequestBody jsonRequest: JSONObject): PartnerMapping {
+        return utilityService.generateMapping(jsonRequest)
     }
 
-    //Fetch Mapping by mappingId
-    @GetMapping("/mapping/{id}")
-    fun findMappingById(@PathVariable id: String): Optional<PartnerMapping> {
-        return partnerMappingRepository.findById(id)
-    }
 
     @PostMapping("/encrypt")
     fun encryptPayload(@RequestBody requestBody: String) : String {

@@ -7,8 +7,10 @@ import org.springframework.data.mongodb.core.mapping.Document
 class PartnerMapping() {
     @Id
     var mappingId = ""
-
-
     var mappingContent = ""
+    override fun toString(): String {
+        return "PartnerMapping(mappingId='$mappingId', mappingContent='$mappingContent')"
+    }
+
 
 }

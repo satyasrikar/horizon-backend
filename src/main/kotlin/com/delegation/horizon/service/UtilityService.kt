@@ -26,7 +26,7 @@ class UtilityService() {
     var aesSecret: String = System.getenv("aes.passcode") ?: "horizonCore"
     var mockServiceUrl: String = System.getenv("mountebank.url") ?: "http://localhost:9995/mapping/mock"
 
-    fun generateJSONFile(jsonRequest: JSONObject): PartnerMapping {
+    fun generateMapping(jsonRequest: JSONObject): PartnerMapping {
         val partnerMapping = PartnerMapping()
         partnerMapping.mappingId = generateId()
         partnerMapping.mappingContent = encryptPayload(jsonRequest.toJSONString())
@@ -45,10 +45,6 @@ class UtilityService() {
         return restTemplate.postForObject(mockServiceUrl, entity, String().javaClass)
     }
 
-    fun fetchMappingById(mappingId: String): String {
-        val fetchedMapping: PartnerMapping = partnerMappingRepository.findPartnerMappingByMappingId(mappingId)
-        return decryptPayload(fetchedMapping.mappingContent)
-    }
 
     fun generateId(): String {
         // AutoGenerate Unique Id
@@ -72,7 +68,7 @@ class UtilityService() {
     }
 
 
-    open fun encryptPayload(payload: String?): String {
+    fun encryptPayload(payload: String?): String {
         val aesEncryptor = AES256TextEncryptor()
         aesEncryptor.setPassword(aesSecret)
         return if(payload!!.isEmpty()){
@@ -82,7 +78,7 @@ class UtilityService() {
         }
     }
 
-    open fun decryptPayload(payload: String?): String {
+    fun decryptPayload(payload: String?): String {
         val aesEncryptor = AES256TextEncryptor()
         aesEncryptor.setPassword(aesSecret)
         return if(payload!!.isEmpty()){
