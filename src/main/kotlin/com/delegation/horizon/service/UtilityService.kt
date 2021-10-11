@@ -15,12 +15,13 @@ import java.util.*
 
 
 @Service
-class UtilityService(
-    val partnerMappingRepository: PartnerMappingRepository
-) {
+class UtilityService() {
+
+    @Autowired
+    lateinit var partnerMappingRepository: PartnerMappingRepository
+
     @Autowired
     lateinit var restTemplate: RestTemplate
-
 
     var aesSecret: String = System.getenv("aes.passcode") ?: "horizonCore"
     var mockServiceUrl: String = System.getenv("mountebank.url") ?: "http://localhost:9995/mapping/mock"
@@ -39,7 +40,7 @@ class UtilityService(
 
     fun mockMapping(): String? {
         val headers = HttpHeaders()
-        headers.accept = Arrays.asList(MediaType.APPLICATION_JSON)
+        headers.accept = listOf(MediaType.APPLICATION_JSON)
         val entity: HttpEntity<String> = HttpEntity<String>(headers)
         return restTemplate.postForObject(mockServiceUrl, entity, String().javaClass)
     }
@@ -71,16 +72,24 @@ class UtilityService(
     }
 
 
-    fun encryptPayload(payload: String?): String {
+    open fun encryptPayload(payload: String?): String {
         val aesEncryptor = AES256TextEncryptor()
         aesEncryptor.setPassword(aesSecret)
-        return aesEncryptor.encrypt(payload)
+        return if(payload!!.isEmpty()){
+            "Empty Payload"
+        } else {
+            aesEncryptor.encrypt(payload)
+        }
     }
 
-    fun decryptPayload(payload: String?): String {
+    open fun decryptPayload(payload: String?): String {
         val aesEncryptor = AES256TextEncryptor()
         aesEncryptor.setPassword(aesSecret)
-        return aesEncryptor.decrypt(payload)
+        return if(payload!!.isEmpty()){
+            "Empty Payload"
+        } else {
+            aesEncryptor.decrypt(payload)
+        }
     }
 
 

@@ -31,8 +31,18 @@ class PartnerController(
 
     //Fetch Mapping by mappingId
     @GetMapping("/mapping/{id}")
-    fun findMappingById(@PathVariable mappingId: String): Optional<PartnerMapping> {
-        return partnerMappingRepository.findById(mappingId)
+    fun findMappingById(@PathVariable id: String): Optional<PartnerMapping> {
+        return partnerMappingRepository.findById(id)
+    }
+
+    @PostMapping("/encrypt")
+    fun encryptPayload(@RequestBody requestBody: String) : String {
+        return utilityService.encryptPayload(requestBody)
+    }
+
+    @PostMapping("/decrypt")
+    fun decryptPayload(@RequestBody requestBody: String) : String {
+        return utilityService.decryptPayload(requestBody)
     }
 
 
