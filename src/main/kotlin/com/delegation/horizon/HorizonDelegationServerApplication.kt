@@ -2,7 +2,8 @@ package com.delegation.horizon
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition
 import io.swagger.v3.oas.annotations.info.Info
-import org.junit.Test
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
 import org.springframework.boot.runApplication
@@ -15,10 +16,11 @@ import org.springframework.boot.runApplication
 )
 )
 class HorizonDelegationServerApplication
+var log: Logger = LoggerFactory.getLogger(HorizonDelegationServerApplication::class.java)
 
 fun main(args: Array<String>) {
     runApplication<HorizonDelegationServerApplication>(*args)
-    println("[[App running!]]")
+    log.info("Delegation Server Started")
 }
 
 
