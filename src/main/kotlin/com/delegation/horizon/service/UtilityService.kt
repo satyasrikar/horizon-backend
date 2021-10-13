@@ -27,11 +27,12 @@ class UtilityService() {
     var aesSecret: String = System.getenv("aes.passcode") ?: "horizonCore"
     var mockServiceUrl: String = System.getenv("mountebank.url") ?: "http://localhost:9995/mapping/mock"
 
-    fun generateMapping(mappingRequestDTO: MappingRequestDTO): PartnerMapping {
+    fun generateMapping(jsonRequest: JSONObject, partnerName: String): PartnerMapping {
         val partnerMapping = PartnerMapping()
         partnerMapping.mappingId = generateId()
-        partnerMapping.mappingContent = encryptPayload(mappingRequestDTO.mappingContentString)
+        partnerMapping.mappingContent = encryptPayload(jsonRequest.toJSONString())
         partnerMapping.isApproved = false
+        partnerMapping.partnerName = partnerName
         try {
             partnerMappingRepository.save(partnerMapping)
         } catch (e: IOException) {
@@ -39,6 +40,8 @@ class UtilityService() {
         }
         return partnerMapping
     }
+
+
 
     fun mockMapping(): String? {
         val headers = HttpHeaders()

@@ -23,8 +23,10 @@ class PartnerController(
 
     //Generate JSON Template / Persist to Mongo
     @PostMapping("/generate")
-    fun generateMapping(@RequestBody mappingRequestDTO: MappingRequestDTO): PartnerMapping {
-        return utilityService.generateMapping(mappingRequestDTO)
+    fun generateMapping(@RequestBody jsonRequest: JSONObject, @RequestParam partnerName: String): PartnerMapping {
+        println(partnerName)
+        println(jsonRequest)
+        return utilityService.generateMapping(jsonRequest, partnerName)
     }
 
     @PostMapping("/encrypt")

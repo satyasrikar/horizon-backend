@@ -10,9 +10,7 @@ class PartnerMapping() {
     var partnerName = ""
     var mappingContent = ""
     var isApproved = false
-    override fun toString(): String {
-        return "PartnerMapping(mappingId='$mappingId', partnerName='$partnerName', mappingContent='$mappingContent', isApproved=$isApproved)"
-    }
+
 
 
 }
