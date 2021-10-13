@@ -37,5 +37,15 @@ class PartnerController(
         return utilityService.decryptPayload(requestBody)
     }
 
+    @GetMapping("/mapping/{mappingId}")
+    fun viewMappingById(@PathVariable mappingId:String) : String {
+        return utilityService.viewMappingById(mappingId)
+    }
+
+    @GetMapping("/mapping/all")
+    fun viewAllMappings() : List<PartnerMapping> {
+        return utilityService.viewAllMappings()
+    }
+
 
 }

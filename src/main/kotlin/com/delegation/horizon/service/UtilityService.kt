@@ -88,5 +88,15 @@ class UtilityService() {
         }
     }
 
+    fun viewMappingById(mappingId: String) : String {
+        val fetchedMapping = partnerMappingRepository.findPartnerMappingByMappingId(mappingId)
+        val jsonResponse = decryptPayload(fetchedMapping.mappingContent)
+        return jsonResponse
+    }
+
+    fun viewAllMappings() : List<PartnerMapping> {
+        return partnerMappingRepository.findAll()
+    }
+
 
 }
