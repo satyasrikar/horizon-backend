@@ -1,5 +1,6 @@
 package com.delegation.horizon.service
 
+import com.delegation.horizon.model.MappingRequestDTO
 import com.delegation.horizon.model.PartnerMapping
 import com.delegation.horizon.repository.PartnerMappingRepository
 import org.jasypt.util.text.AES256TextEncryptor
@@ -26,10 +27,11 @@ class UtilityService() {
     var aesSecret: String = System.getenv("aes.passcode") ?: "horizonCore"
     var mockServiceUrl: String = System.getenv("mountebank.url") ?: "http://localhost:9995/mapping/mock"
 
-    fun generateMapping(jsonRequest: JSONObject): PartnerMapping {
+    fun generateMapping(mappingRequestDTO: MappingRequestDTO): PartnerMapping {
         val partnerMapping = PartnerMapping()
         partnerMapping.mappingId = generateId()
-        partnerMapping.mappingContent = encryptPayload(jsonRequest.toJSONString())
+        partnerMapping.mappingContent = encryptPayload(mappingRequestDTO.mappingContentString)
+        partnerMapping.isApproved = false
         try {
             partnerMappingRepository.save(partnerMapping)
         } catch (e: IOException) {
@@ -96,6 +98,13 @@ class UtilityService() {
 
     fun viewAllMappings() : List<PartnerMapping> {
         return partnerMappingRepository.findAll()
+    }
+
+    fun approvePartnerMapping(mappingId: String) : String {
+        val fetchedMapping = partnerMappingRepository.findPartnerMappingByMappingId(mappingId)
+        fetchedMapping.isApproved = true
+        partnerMappingRepository.save(fetchedMapping)
+        return "Mapping Approved"
     }
 
 

@@ -7,9 +7,11 @@ import org.springframework.data.mongodb.core.mapping.Document
 class PartnerMapping() {
     @Id
     var mappingId = ""
+    var partnerName = ""
     var mappingContent = ""
+    var isApproved = false
     override fun toString(): String {
-        return "PartnerMapping(mappingId='$mappingId', mappingContent='$mappingContent')"
+        return "PartnerMapping(mappingId='$mappingId', partnerName='$partnerName', mappingContent='$mappingContent', isApproved=$isApproved)"
     }
 
 

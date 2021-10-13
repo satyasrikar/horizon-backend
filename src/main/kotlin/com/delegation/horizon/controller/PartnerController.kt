@@ -1,6 +1,7 @@
 package com.delegation.horizon.controller
 //Partner Controller
 
+import com.delegation.horizon.model.MappingRequestDTO
 import com.delegation.horizon.model.PartnerMapping
 import com.delegation.horizon.service.UtilityService
 import org.json.simple.JSONObject
@@ -22,10 +23,9 @@ class PartnerController(
 
     //Generate JSON Template / Persist to Mongo
     @PostMapping("/generate")
-    fun generateMapping(@RequestBody jsonRequest: JSONObject): PartnerMapping {
-        return utilityService.generateMapping(jsonRequest)
+    fun generateMapping(@RequestBody mappingRequestDTO: MappingRequestDTO): PartnerMapping {
+        return utilityService.generateMapping(mappingRequestDTO)
     }
-
 
     @PostMapping("/encrypt")
     fun encryptPayload(@RequestBody requestBody: String) : String {
@@ -45,6 +45,11 @@ class PartnerController(
     @GetMapping("/mapping/all")
     fun viewAllMappings() : List<PartnerMapping> {
         return utilityService.viewAllMappings()
+    }
+
+    @PutMapping("/mapping/{mappingId}")
+    fun approveMapping(@PathVariable mappingId: String): String {
+        return utilityService.approvePartnerMapping(mappingId)
     }
 
 
